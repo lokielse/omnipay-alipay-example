@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Omnipay Alipay Demo Cart</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+
+</head>
+<body>
+<form class="form-horizontal" id="payto-form">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>New Order</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="total_fee">Total Fee</label>
+
+      <div class="col-md-4">
+        <input id="total_fee" name="total_fee" placeholder="Input Total Fee" class="form-control input-md" required=""
+               type="text" value="0.01">
+
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for=""></label>
+
+      <div class="col-md-4">
+        <button id="" name="" class="btn btn-primary">Buy</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
+<script type="text/javascript">
+
+  $('#payto-form').submit(function() {
+
+    $.ajax({
+      url: 'pay/alipay/payto.do',
+      data: {
+        total_fee: $('#total_fee').val()
+      },
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        if (res.payto_url) {
+          location.href = res.payto_url
+        } else {
+          this.error()
+        }
+      },
+      error: function() {
+        alert('http error');
+      }
+    })
+
+
+    return false;
+  })
+</script>
+
+</body>
+</html>
