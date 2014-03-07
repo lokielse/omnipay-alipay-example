@@ -40,7 +40,7 @@ Route::post(
 );
 ```
 
-### Pay return
+### Pay Success Client Return(1 min limit to verify)
 ```
 /**
  * pay success client return.
@@ -74,7 +74,7 @@ Route::get(
 ```
 
 
-### Pay notify
+### Pay Success Server Notify
 ```
 /**
  * pay success server notify.(!!!not support local-test server)
