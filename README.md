@@ -1,6 +1,6 @@
 # Omnipay Alipay Example, Build with Laravel
 
-*commands
+* commands
 ```
 composer update -vvv
 composer dump-autoload
@@ -8,7 +8,7 @@ php artisan dump-autoload
 php artisan optimize
 ```
 
-*start
+* start
 ```
 http://youdomain.com/cart.html
 ```
