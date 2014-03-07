@@ -8,12 +8,12 @@ php artisan dump-autoload
 php artisan optimize
 ```
 
-* start
+* Start
 ```
 http://youdomain.com/cart.html
 ```
 
-### payto api, get payto url
+### Payto api, get payto url
 ```
 Route::post(
     '/pay/alipay/payto.do',
@@ -40,7 +40,7 @@ Route::post(
 );
 ```
 
-### pay return
+### Pay return
 ```
 /**
  * pay success client return.
@@ -74,7 +74,7 @@ Route::get(
 ```
 
 
-### pay notify
+### Pay notify
 ```
 /**
  * pay success server notify.(!!!not support local-test server)
