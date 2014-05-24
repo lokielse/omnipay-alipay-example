@@ -10,7 +10,7 @@ php artisan optimize
 
 * Start
 ```
-http://youdomain.com/cart.html
+http://yourdomain.com/cart.html
 ```
 
 ### Payto api, get payto url
