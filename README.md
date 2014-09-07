@@ -14,7 +14,7 @@ http://yourdomain.com/cart.html
 ```
 
 ### Payto api, get payto url
-```
+```php
 Route::post(
     '/pay/alipay/payto.do',
     function () {
@@ -41,7 +41,7 @@ Route::post(
 ```
 
 ### Pay Success Client Return(1 min limit to verify)
-```
+```php
 /**
  * pay success client return.
  */
@@ -75,7 +75,7 @@ Route::get(
 
 
 ### Pay Success Server Notify
-```
+```php
 /**
  * pay success server notify.(!!!not support local-test server)
  */
