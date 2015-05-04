@@ -79,7 +79,7 @@ Route::get(
 /**
  * pay success server notify.(!!!not support local-test server)
  */
-Route::get(
+Route::post(
     '/pay/alipay/notify.do',
     function () {
         $gateway = Omnipay::create('Alipay_Express');
