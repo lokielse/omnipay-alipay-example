@@ -43,7 +43,7 @@ Route::post(
 /**
  * pay success client return.
  */
-Route::get(
+Route::post(
     '/pay/alipay/return.do',
     function () {
         //dd(Input:all());
