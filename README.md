@@ -17,14 +17,14 @@ http://yourdomain.com/cart.html
 ### Payto API, get payto url
 ```php
 Route::post('pay/alipay/payto', function () {
-    $return_url = Input::getUriForPath('/pay/alipay/return');
-    $notify_url = Input::getUriForPath('/pay/alipay/notify');
+    $returnUrl = Input::getUriForPath('/pay/alipay/return');
+    $notifyUrl = Input::getUriForPath('/pay/alipay/notify');
     $gateway    = Omnipay::create('Alipay_Express');
     $gateway->setPartner(Config::get('pay.alipay.id'));
     $gateway->setKey(Config::get('pay.alipay.key'));
     $gateway->setSellerEmail(Config::get('pay.alipay.email'));
-    $gateway->setNotifyUrl($notify_url);
-    $gateway->setReturnUrl($return_url);
+    $gateway->setNotifyUrl($returnUrl);
+    $gateway->setReturnUrl($notifyUrl);
     # new order
     # db
     $order    = array(
@@ -52,14 +52,14 @@ Route::get('pay/alipay/return', function () {
     $options['ca_cert_path']   = storage_path() . '/cert/cacert.pem';
     $options['sign_type']      = 'MD5';
     $request                   = $gateway->completePurchase($options)->send();
-    $debug_data                = $request->getData();
+    $debugData                = $request->getData();
     if ($request->isSuccessful()) { //
-        $out_trade_no = Input::get('out_trade_no');
+        $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
         # !!!!you should check your order status here for duplicate request.
         #####
-        Event::fire('alipay.pay_success', ['out_trade_no' => $out_trade_no, 'meta' => Input::all()]);
+        Event::fire('alipay.pay_success', ['out_trade_no' => $outTradeNo, 'meta' => Input::all()]);
         echo 'hey! pay verify success! make a redirect with client or server here';
     } else {
         echo 'hey! pay verify fail! make a redirect with client or server here';
@@ -82,14 +82,14 @@ Route::post('pay/alipay/notify', function () {
     $options['ca_cert_path']   = storage_path() . '/cert/cacert.pem';
     $options['sign_type']      = 'MD5';
     $request                   = $gateway->completePurchase($options)->send();
-    $debug_data                = $request->getData();
+    $debugData                = $request->getData();
     if ($request->isSuccessful()) {
-        $out_trade_no = Input::get('out_trade_no');
+        $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
         # !!!!you should check your order status here for duplicate request.
         #####
-        Event::fire('alipay.pay_success', ['out_trade_no' => $out_trade_no, 'meta' => Input::all()]);
+        Event::fire('alipay.pay_success', ['out_trade_no' => $outTradeNo, 'meta' => Input::all()]);
         die('success'); //it should be string 'success'
     } else {
         die('fail'); //it should be string 'fail'
@@ -101,9 +101,8 @@ Route::post('pay/alipay/notify', function () {
 
 ## Alipay Mobile Express, Get Order Info String
 ```php
-Route::post('pay/alipay/payto', function () {
-    $return_url = Input::getUriForPath('/pay/alipay/return');
-    $notify_url = Input::getUriForPath('/pay/alipay/notify');
+Route::post('pay/alipay/mobile/payto', function () {
+    $notify_url = Input::getUriForPath('/pay/alipay/mobile/notify');
     $gateway    = Omnipay::create('Alipay_MobileExpress');
     $gateway->setPartner(Config::get('pay.alipay.id'));
     $gateway->setKey(Config::get('pay.alipay.key'));
@@ -130,7 +129,7 @@ Route::post('pay/alipay/payto', function () {
 ```
 ## Alipay Mobile Express, Server Notify
 ```php
-Route::post('/pay/alipay/notify', function () {
+Route::post('/pay/alipay/mobile/notify', function () {
     //Gateway:Alipay_MobileExpress
     $gateway = Omnipay::create('Alipay_MobileExpress');
     $gateway->setPartner(Config::get('pay.alipay.id'));
@@ -142,14 +141,14 @@ Route::post('/pay/alipay/notify', function () {
     //The sign type should be RSA
     $options['sign_type']      = 'RSA';
     $request                   = $gateway->completePurchase($options)->send();
-    $debug_data                = $request->getData();
+    $debugData                 = $request->getData();
     if ($request->isSuccessful()) {
-        $out_trade_no = Input::get('out_trade_no');
+        $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
         # !!!!you should check your order status here for duplicate request.
         #####
-        Event::fire('alipay.pay_success', ['out_trade_no' => $out_trade_no, 'meta' => Input::all()]);
+        Event::fire('alipay.pay_success', ['out_trade_no' => $outTradeNo, 'meta' => Input::all()]);
         die('success'); //it should be string 'success'
     } else {
         die('fail'); //it should be string 'fail'
