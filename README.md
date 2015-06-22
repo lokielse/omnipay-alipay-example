@@ -176,6 +176,7 @@ Route::post(
 
 
 
+
 //YourController.m
 //Click Buy
 NSString featureId = @"com.example.product.1001";
@@ -187,7 +188,7 @@ NSString featureId = @"com.example.product.1001";
 
     }];
 }];
-
+```
 
 ## Alipay Mobile Express, Payto For Android
 ```java
@@ -197,5 +198,4 @@ PayTask alipay = new PayTask(PayDemoActivity.this);
 
 //You should get the orderInfoStr from server first
 String result = alipay.pay(orderInfoStr);
-
 ```
