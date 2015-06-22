@@ -178,7 +178,7 @@ Route::post('/pay/alipay/notify', function () {
 //Click Buy
 NSString featureId = @"com.example.product.1001";
 
-[APIClient get:@"http://api.example.com/pay/alipay/payto" result:(NSDictionary *result){
+[APIClient get:@"http://api.example.com/pay/alipay/payto" data:{featureId:featureId, num:1} result:(NSDictionary *result){
     NSLog(@"result2 = %@", result)
     [[AlipaySDK defaultService] payOrder:result[@"order_info_str"] fromScheme:@"your-schema" callback:^(NSDictionary *resultDic) {
        //result
