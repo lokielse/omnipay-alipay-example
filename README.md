@@ -97,7 +97,7 @@ Route::post('pay/alipay/notify', function () {
 });
 ```
 
-### TL;DR
+# TL;DR
 
 ## Alipay Mobile Express, Get Order Info String
 ```php
