@@ -102,13 +102,12 @@ Route::post('pay/alipay/notify', function () {
 ## Alipay Mobile Express, Get Order Info String
 ```php
 Route::post('pay/alipay/mobile/payto', function () {
-    $notify_url = Input::getUriForPath('/pay/alipay/mobile/notify');
+    $notifyUrl = Input::getUriForPath('/pay/alipay/mobile/notify');
     $gateway    = Omnipay::create('Alipay_MobileExpress');
     $gateway->setPartner(Config::get('pay.alipay.id'));
     $gateway->setKey(Config::get('pay.alipay.key'));
     $gateway->setSellerEmail(Config::get('pay.alipay.email'));
-    $gateway->setNotifyUrl($notify_url);
-    $gateway->setReturnUrl($return_url);
+    $gateway->setNotifyUrl($notifyUrl);
     //private key
     $gateway->setPrivateKey($yourPrivateKey);
     # new order
