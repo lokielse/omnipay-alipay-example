@@ -49,9 +49,9 @@ Route::get('pay/alipay/return', function () {
     $options['request_params'] = Input::all();
     $options['ca_cert_path']   = storage_path() . '/cert/cacert.pem';
     $options['sign_type']      = 'MD5';
-    $request                   = $gateway->completePurchase($options)->send();
-    $debugData                = $request->getData();
-    if ($request->isSuccessful()) { //
+    $response                   = $gateway->completePurchase($options)->send();
+    $debugData                = $response->getData();
+    if ($response->isSuccessful() && $response->isTradeStatusOk()) { //
         $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
@@ -79,9 +79,9 @@ Route::post('pay/alipay/notify', function () {
     $options['request_params'] = Input::all();
     $options['ca_cert_path']   = storage_path('cert/cacert.pem');
     $options['sign_type']      = 'MD5';
-    $request                   = $gateway->completePurchase($options)->send();
-    $debugData                = $request->getData();
-    if ($request->isSuccessful()) {
+    $response                   = $gateway->completePurchase($options)->send();
+    $debugData                = $response->getData();
+    if ($response->isSuccessful() && $response->isTradeStatusOk()) {
         $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
@@ -137,9 +137,9 @@ Route::post('/pay/alipay/mobile/notify', function () {
     $options['ali_public_key']   = storage_path('cert/ali_public_key.pem');
     //The sign type should be RSA
     $options['sign_type']      = 'RSA';
-    $request                   = $gateway->completePurchase($options)->send();
-    $debugData                 = $request->getData();
-    if ($request->isSuccessful()) {
+    $response                   = $gateway->completePurchase($options)->send();
+    $debugData                 = $response->getData();
+    if ($response->isSuccessful() && $response->isTradeStatusOk()) {
         $outTradeNo = Input::get('out_trade_no');
         #####
         # eg: $order = Order::find($out_trade_no);
