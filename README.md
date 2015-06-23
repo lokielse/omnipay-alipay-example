@@ -3,8 +3,6 @@
 * commands
 ```
 composer update -vvv
-composer dump-autoload
-php artisan dump-autoload
 php artisan optimize
 ```
 
