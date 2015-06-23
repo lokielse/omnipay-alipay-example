@@ -77,7 +77,7 @@ Route::post('pay/alipay/notify', function () {
     $gateway->setKey(Config::get('pay.alipay.key'));
     $gateway->setSellerEmail(Config::get('pay.alipay.email'));
     $options['request_params'] = Input::all();
-    $options['ca_cert_path']   = storage_path() . '/cert/cacert.pem';
+    $options['ca_cert_path']   = storage_path('cert/cacert.pem');
     $options['sign_type']      = 'MD5';
     $request                   = $gateway->completePurchase($options)->send();
     $debugData                = $request->getData();
